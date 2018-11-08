@@ -4,6 +4,8 @@
                 [respo/ui                   "0.3.10"]
                 [respo/reacher              "0.1.0"]
                 [org.clojure/core.incubator "0.1.4"]]
+ :repositories {"central" {:url "https://maven.aliyun.com/nexus/content/groups/public/"}
+                "clojars" {:url "https://mirrors.ustc.edu.cn/clojars/"}}
  :open-file-command ["subl" ["%s:%s:%s" :file :line :column]]
  :socket-repl {:port 0}
  :builds {:client {:target :browser

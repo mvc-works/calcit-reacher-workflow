@@ -10,10 +10,10 @@
 
 (def site
   {:storage "reacher",
-   :dev-ui "http://localhost:8100/main.css",
-   :release-ui "http://cdn.tiye.me/favored-fonts/main.css",
-   :cdn-url "http://cdn.tiye.me/reacher/",
-   :cdn-folder "tiye.me:cdn/reacher",
-   :title "Reacher",
+   :dev-ui "http://localhost:8100/main-eva.css",
+   :release-ui "http://cdn.tiye.me/favored-fonts/main-eva.css",
+   :cdn-url "http://cdn.tiye.me/reacher-workflow/",
+   :cdn-folder "tiye.me:cdn/reacher-workflow",
+   :title "Reacher Workflow",
    :icon "http://cdn.tiye.me/logo/respo.png",
-   :upload-folder "tiye.me:repo/Respo/reacher/"})
+   :upload-folder "tiye.me:repo/mvc-works/reacher-workflow/"})

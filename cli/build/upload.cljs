@@ -1,7 +1,7 @@
 
 (ns build.upload
   (:require ["child_process" :as child-process]
-            [reacher.config :as config]))
+            [app.config :as config]))
 
 (defn sh! [command]
   (println command)
