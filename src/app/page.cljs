@@ -3,8 +3,7 @@
   (:require [app.schema :as schema]
             [cljs.reader :refer [read-string]]
             [app.config :as config]
-            [app.util :refer [get-env!]]
-            [build.util :refer [get-ip!]]
+            [cumulo-util.build :refer [get-ip!]]
             ["react-dom/server" :refer [renderToString]]
             ["react" :as React]
             ["fs" :as fs]
@@ -22,9 +21,9 @@
     {}
     (head
      {}
-     (title {:title (:title info)})
+     (title {} (:title info))
      (link {:ref "icon", :type "image/png", :href (:icon info)})
-     (meta' {:charSet "utf8"})
+     (meta' {:char-set "utf8"})
      (meta'
       {:name "viewport",
        :content "width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"})
@@ -34,7 +33,7 @@
           (apply array)))
     (body
      {}
-     (div {:className "app", :dangerouslySetInnerHTML {:__html content}})
+     (div {:class-name "app", :dangerouslySetInnerHTML {:__html content}})
      (->> (:scripts info)
           (map-indexed (fn [idx src] (script {:src src, :key idx})))
           (apply array))))))
@@ -48,17 +47,14 @@
      :scripts ["/client.js"],
      :inline-styles []})))
 
-(def local-bundle? (= "local-bundle" (get-env! "mode")))
-
 (defn slurp [file-path] (fs/readFileSync file-path "utf8"))
 
 (defn prod-page []
-  (let [content (renderToString (comp-container schema/store))
-        assets (read-string (slurp "dist/assets.edn"))
-        cdn (if local-bundle? "" (:cdn-url config/site))
+  (let [assets (read-string (slurp "dist/assets.edn"))
+        cdn (if config/cdn? (:cdn-url config/site) "")
         prefix-cdn (fn [x] (str cdn x))]
     (make-page
-     content
+     ""
      (merge
       base-info
       {:styles [(:release-ui config/site)],
@@ -69,6 +65,7 @@
 (defn spit [file-path content] (fs/writeFileSync file-path content))
 
 (defn main! []
-  (if (contains? config/bundle-builds (get-env! "mode"))
-    (spit "dist/index.html" (prod-page))
-    (spit "target/index.html" (dev-page))))
+  (println "Running mode:" (if config/dev? "dev" "release"))
+  (if config/dev?
+    (spit "target/index.html" (dev-page))
+    (spit "dist/index.html" (prod-page))))

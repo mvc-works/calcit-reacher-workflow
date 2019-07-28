@@ -7,8 +7,10 @@
             ["react" :as React]
             ["react-dom" :as ReactDOM]
             [app.comp.container :refer [comp-container]]
-            [reacher.core :refer [register-dispatcher!]]
-            ["shortid" :as shortid]))
+            ["shortid" :as shortid]
+            [applied-science.js-interop :as j]
+            [reacher.core :refer [dispatch-context]]
+            [cumulo-util.core :refer [repeat!]]))
 
 (defonce *store (atom schema/store))
 
@@ -20,20 +22,25 @@
 (def mount-target (.querySelector js/document ".app"))
 
 (defn persist-storage! []
-  (.setItem js/localStorage (:storage config/site) (pr-str @*store)))
+  (.setItem js/localStorage (:storage-key config/site) (pr-str @*store)))
 
-(defn render-app! [] (ReactDOM/render (comp-container @*store) mount-target))
+(defn render-app! []
+  (ReactDOM/render
+   (React/createElement
+    (j/get dispatch-context :Provider)
+    (j/obj :value dispatch!)
+    (comp-container (j/obj :store @*store)))
+   mount-target))
 
 (def ssr? (some? (js/document.querySelector "meta.respo-ssr")))
 
 (defn main! []
   (if ssr? (do nil))
-  (register-dispatcher! #(dispatch! %1 %2))
   (render-app!)
   (add-watch *store :changes (fn [] (render-app!)))
   (.addEventListener js/window "beforeunload" persist-storage!)
-  (js/setInterval persist-storage! (* 1000 60))
-  (let [raw (.getItem js/localStorage (:storage config/site))]
+  (repeat! 60 persist-storage!)
+  (let [raw (.getItem js/localStorage (:storage-key config/site))]
     (when (some? raw) (dispatch! :hydrate-storage (read-string raw))))
   (println "App started."))
 
