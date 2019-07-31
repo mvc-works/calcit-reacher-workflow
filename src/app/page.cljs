@@ -12,8 +12,7 @@
             [app.schema :as schema])
   (:require-macros [clojure.core.strint :refer [<<]]))
 
-(def base-info
-  {:title (:title config/site), :icon (:icon config/site), :ssr nil, :inline-html nil})
+(def base-info {:title (:title config/site), :icon (:icon config/site), :inline-html nil})
 
 (defn make-page [content info]
   (renderToString
@@ -59,7 +58,6 @@
       base-info
       {:styles [(:release-ui config/site)],
        :scripts (map #(-> % :output-name prefix-cdn) assets),
-       :ssr "respo-ssr",
        :inline-styles [(slurp "./entry/main.css")]}))))
 
 (defn spit [file-path content] (fs/writeFileSync file-path content))
