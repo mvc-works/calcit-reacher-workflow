@@ -9,6 +9,7 @@
 
 (defn build-cdn []
   (sh! "rm -rf dist/*")
+  (sh! "yarn css-release")
   (shadow/release :client)
   (shadow/compile :page)
   (sh! "release=true cdn=true node target/page.js")
@@ -16,6 +17,7 @@
 
 (defn build []
   (sh! "rm -rf dist/*")
+  (sh! "yarn css-release")
   (shadow/release :client)
   (shadow/compile :page)
   (sh! "release=true node target/page.js")
