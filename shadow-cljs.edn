@@ -1,11 +1,12 @@
 
 {:source-paths ["macros" "src" "cli"]
+ :cache-blockers #{cumulo-util.build}
  :dependencies [[mvc-works/hsl              "0.1.2"]
                 [respo/ui                   "0.3.13"]
                 [respo/reacher              "0.2.1"]
-                [appliedscience/js-interop  "0.1.20"]
                 [medley                     "1.2.0"]
                 [cumulo/util                "0.1.10"]
+                [appliedscience/js-interop  "0.1.20"]
                 [org.clojure/core.incubator "0.1.4"]]
  :repositories {"central" {:url "https://maven.aliyun.com/nexus/content/groups/public/"}
                 "clojars" {:url "https://mirrors.ustc.edu.cn/clojars/"}}
