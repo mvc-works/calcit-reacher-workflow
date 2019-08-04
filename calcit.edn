@@ -88,6 +88,7 @@
             "v" {:type :leaf, :by "root", :at 1540746303328, :text "span", :id "q6vInNlrk"}
             "x" {:type :leaf, :by "rJG4IHzWf", :at 1540880770880, :text "button", :id "SdQOPg2syV"}
             "xD" {:type :leaf, :by "root", :at 1541311884714, :text "a", :id "EekJgCcco3"}
+            "y5" {:type :leaf, :by "rJG4IHzWf", :at 1564938320545, :text "defcomp", :id "ht0Hh5OlNw"}
            }
           }
          }
@@ -125,7 +126,7 @@
      "comp-container" {
       :type :expr, :by "root", :at 1540712128528, :id "0-JxRevaxd"
       :data {
-       "T" {:type :leaf, :by "rJG4IHzWf", :at 1564335681054, :text "defn", :id "ccpsX5s_ps"}
+       "T" {:type :leaf, :by "rJG4IHzWf", :at 1564938316867, :text "defcomp", :id "ccpsX5s_ps"}
        "j" {:type :leaf, :by "root", :at 1540712128528, :text "comp-container", :id "6u5ymxOw4r"}
        "p" {
         :type :expr, :by "rJG4IHzWf", :at 1564335681816, :id "CdyUPS4ZDM"
