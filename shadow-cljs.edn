@@ -3,7 +3,7 @@
  :cache-blockers #{cumulo-util.build}
  :dependencies [[mvc-works/hsl              "0.1.2"]
                 [respo/ui                   "0.3.13"]
-                [respo/reacher              "0.3.0-a1"]
+                [respo/reacher              "0.3.0"]
                 [medley                     "1.2.0"]
                 [cumulo/util                "0.1.10"]
                 [appliedscience/js-interop  "0.1.20"]
